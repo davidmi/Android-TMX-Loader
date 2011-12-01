@@ -1,0 +1,47 @@
+TMX LOADER FOR ANDROID
+First beta release - 0.8
+Written by David Iserovich
+
+Decision of distribution license pending,
+meanwhile you are free to use the code if you
+attribute credit.
+
+
+Tiled
+http://www.mapeditor.org/
+
+The map editor Tiled produce files in .tmx format
+which is xml based.
+
+This app and its classes allow the loading of
+tmx files into a TileMapData classes 
+
+USAGE
+-----
+
+src/davidiserovich/TMXLoader/ contains the main source files.
+assets/ contains an example tmx file and its tileset image.
+
+The entire directory structure is a regular Eclipse Android project,
+and can be imported.
+
+The main activity TMXLoaderActivity uses the TileMapData object and
+Canvas to create a Bitmap containing the arrangment of tiles that
+the tmx specifies.
+
+FEATURE RESTRICTIONS/TODO
+
+- The only tilemap layout supported is 0 border, 0 margins, 0 spacing.
+
+- Map objects are not yet supported.
+
+- Tile rotations are not yet supported.
+
+- The only supported data format is CSV
+(This can be set in Tiled in Edit->Preferences->Store Tile Data As: CSV)
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Example Tileset" tilewidth="32" tileheight="32">
+  <image source="example_tileset.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Map Background" width="10" height="10">
+  <data encoding="csv">
+2,2,2,2,2,2,2,2,2,2,
+2,4,4,4,4,4,4,4,4,2,
+2,4,3,3,3,3,3,3,4,2,
+2,4,3,4,4,4,4,3,4,2,
+2,4,3,4,0,0,4,3,4,2,
+2,4,3,4,0,0,4,3,4,2,
+2,4,3,4,4,4,4,3,4,2,
+2,4,3,3,3,3,3,3,4,2,
+2,4,4,4,4,4,4,4,4,2,
+2,2,2,2,2,2,2,2,2,2
+</data>
+ </layer>
+</map>
