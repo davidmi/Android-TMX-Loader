@@ -11,7 +11,7 @@ public class TileMapData {
 	 */
 	
 	/* Constants */
-	long GID_MASK = 0x3fffffff;
+	public static final long GID_MASK = 0x3fffffff;
 	
 	static class TileSet{
 		public String name;
@@ -63,7 +63,7 @@ public class TileMapData {
 		
 	}
 	
-	public class TMXObject{
+	static class TMXObject{
 		/*
 		 * Holds an "object" from the tilemap.
 		 * These are for pixel-precision placed
@@ -73,9 +73,18 @@ public class TileMapData {
 		
 		
 		String name;
+		String type;
 		int x, y;
 		int width, height;
-		int gid;
+		
+		// Design decision:
+		// All that matters in an object group is it's name.
+		// We could separate tiles into a HashMap by name, but
+		// I want to minimize code complexity, and nesting HashMaps
+		// is not a good way to do this. This does add to search time,
+		// but I do not expect a map to have an unreasonable number of
+		// objects.
+		String objectGroup;
 	}
 	
 	public long getGIDAt(int x, int y){
@@ -158,12 +167,12 @@ public class TileMapData {
 	public String orientation; // Must be "orthogonal", for now.
 	
 	public ArrayList<TileSet> tilesets; // <tileset.name, tileset>
-	public HashMap<String, TMXObject> objects; // <object.name, object>
+	public ArrayList<TMXObject> objects; // We can search by several parameters (not just name) so a linear search is probably best
 	public ArrayList<Layer> layers;
 	
 	public TileMapData(){
 		tilesets = new ArrayList<TileSet>();
-		objects = new HashMap<String, TMXObject>();
+		objects = new ArrayList<TMXObject>();
 		layers = new ArrayList<Layer>();
 	}
 }

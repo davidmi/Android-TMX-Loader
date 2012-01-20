@@ -6,7 +6,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.sax.StartElementListener;
+//import android.sax.StartElementListener;
 import android.util.Log;
 
 public class TMXHandler extends DefaultHandler {
@@ -18,18 +18,21 @@ public class TMXHandler extends DefaultHandler {
 	// NOTE: Map Object loading is not yet implemented 
 	
 	// Markers for which tag we're in
-	private boolean inMap, inTileSet, inTile, inLayer, inData, inObjectGroup, inProperties;
+	private boolean inTileSet, inTile, inLayer, inData, inObjectGroup, inProperties;
 	
 	// ID of the current tile that we're adding properties to.
 	// This is actually an OFFSET from firstGID of the tile in
 	// the tileset. Beware.
 	private String currentTileID;
+	private String currentObjectGroupName;
+	TileMapData.TMXObject currentObject;
 	
 	TileMapData.TileSet currentTileSet;
 	TileMapData.Layer currentLayer;
 	
 	HashMap<String, HashMap<String, String>> currentTileSetProperties;
 	HashMap<String, String> currentLayerProperties;
+	
 	
 	private TileMapData data;
 	
@@ -68,7 +71,7 @@ public class TMXHandler extends DefaultHandler {
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 		if(localName.equals("map")) { 
-		      inMap = true; 
+		      //inMap = true; 
 		      // Check that the orientation is orthogonal
 		      if (!(atts.getValue("orientation").equals("orthogonal"))){
 		    	  throw new SAXException("Unsupported orientation. Parse Terminated.");
@@ -133,6 +136,23 @@ public class TMXHandler extends DefaultHandler {
 		    	if (!encoding.equals("csv")){
 		    		throw new SAXException("Unsupported encoding. Parse Terminated.");
 		    	}
+		    	
+		    } else if(localName.equals("objectgroup")){
+		    	inObjectGroup = true;
+		    	currentObjectGroupName = atts.getValue("name");
+		    	
+		    } else if(localName.equals("object")){
+		    	currentObject = new TileMapData.TMXObject();
+		    	currentObject.name = atts.getValue("name");
+		    	currentObject.type = atts.getValue("type");
+		    	currentObject.x = Integer.parseInt(atts.getValue("x"));
+		    	currentObject.y = Integer.parseInt(atts.getValue("y"));
+		    	currentObject.width = Integer.parseInt(atts.getValue("width"));
+		    	currentObject.height = Integer.parseInt(atts.getValue("height"));
+		    	if(inObjectGroup){
+		    		currentObject.objectGroup = currentObjectGroupName;
+		    	} else { currentObject.objectGroup = null; }
+		    	
 		    }
 	}
 	
@@ -140,7 +160,7 @@ public class TMXHandler extends DefaultHandler {
 	public void endElement(String namespaceURI, String localName, String qName) throws SAXException { 
 	    
 	    if(localName.equals("map")) { 
-	      inMap = false;
+	      //inMap = false;
 	      
 	    } else if(localName.equals("tileset")) { 
 		    inTileSet = false;
@@ -171,6 +191,12 @@ public class TMXHandler extends DefaultHandler {
     		bufferIndex = 0;
     		currentX = 0;
     		currentY = 0;
+    		
+	    } else if(localName.equals("objectgroup")){
+	    	inObjectGroup = false;
+	    	
+	    } else if (localName.equals("object")){
+	    	data.objects.add(currentObject);
 	    }
 	}
 	
@@ -208,7 +234,7 @@ public class TMXHandler extends DefaultHandler {
 			    		if (currentX < (currentLayer.width - 1)){
 			    			currentX++;
 			    		
-			    		}else if (currentY < (currentLayer.width - 1)){
+			    		}else if (currentY < (currentLayer.height - 1)){
 			    			currentX = 0;
 			    			currentY++;
 			    		}
