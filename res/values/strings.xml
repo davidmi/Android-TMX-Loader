@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">The image below was loaded from a TMX file</string>
-    <string name="app_name">TMXLoader</string>
-</resources>
