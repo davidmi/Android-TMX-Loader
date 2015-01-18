@@ -113,7 +113,7 @@ public class TileMapData {
 		long currentFirstGID;
 		for (int i = tilesets.size() - 1; i >= 0; i--){
 			 currentFirstGID = tilesets.get(i).firstGID;
-			 if (currentFirstGID <= GID) return new Long(GID - currentFirstGID);
+			 if (currentFirstGID <= GID) return Long.valueOf(GID - currentFirstGID);
 		}
 		// The GID is not valid, or there was an ordering problem 
 		// in the TMX file and the tilesets GIDs are not ordered from
@@ -140,7 +140,7 @@ public class TileMapData {
 		 * Get the index of a tileset by its name.
 		 */
 		for (int i = tilesets.size() - 1; i >= 0; i--){
-			 if (name.equals(tilesets.get(i).name)) return new Integer(i);
+			 if (name.equals(tilesets.get(i).name)) return Integer.valueOf(i);
 		}
 		return null;
 		
@@ -152,7 +152,7 @@ public class TileMapData {
 		 */
 		
 		for (int i = 0; i < layers.size(); i++){
-			if (layers.get(i).name.equals(name)) return new Integer(i);
+			if (layers.get(i).name.equals(name)) return Integer.valueOf(i);
 		}
 		return null;
 	}
