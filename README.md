@@ -12,7 +12,7 @@ The map editor [Tiled (link)](http://www.mapeditor.org/) produce files in an XML
 
 This library and its classes allow the loading of TMX files into a `TileMapData` object, and allow the creating of an Android Bitmap based on said `TileMapData` object.
 
-USAGE
+What's in the Box
 -----
 
 `TMXLoader/src/davidiserovich/TMXLoader/` contains the main source files.
@@ -20,9 +20,12 @@ USAGE
 
 Both directories are regular Eclipse Android projects, and can be imported.
 
-The main activity TMXLoaderActivity in TMXLoaderExample uses the `TileMapData` object and `Canvas` to create a Bitmap containing the arrangment of tiles that the TMX specifies.
+How it Works
+---
 
-### To use
+The main activity in TMXLoaderExample is called TMXLoaderActivity, and uses the `TileMapData` object and a `Canvas` to create a `Bitmap` containing the arrangment of tiles that the TMX specifies.
+
+### Setting it Up
 
 - To import in Eclipse, choose `File` -> `Import` -> `General` -> `Existing Projects Into Workspace` and select the folder `TMXLoader`.
 - To try the example app, do the same for the `TMXLoaderExample` directory
@@ -40,7 +43,6 @@ Known Restrictions
 - The only supported data format is CSV
 (This can be set in Tiled in `Edit` -> `Preferences` -> `Store Tile Data As: CSV`)
 
-***
 
 CHANGES
 -------
@@ -54,12 +56,12 @@ CHANGES
 
 TODO
 ----
-[ ] Javadoc
-[ ] Compressed file support
-[ ] Support for different tile border, margin, and spacing widths
-[ ] Support for map objects
-[ ] Tile rotation
-[ ] XML based TMX files
+- [ ] Javadoc
+- [ ] Compressed file support
+- [ ] Support for different tile border, margin, and spacing widths
+- [ ] Support for map objects
+- [ ] Tile rotation
+- [ ] XML based TMX files
 				
 
 
